@@ -1,9 +1,16 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
+const sequelize = require('../libs/sequelize');
+
+//const pool = require('../libs/postgresPool');
+//const pool = require('../libs/sequelize');
 
 class ProductsServices {
   constructor() {
-    (this.products = []), this.generate();
+    this.products = [];
+    this.generate();
+    //this.pool = pool;
+    //this.pool.on('error', (err) => console.error(err));
   }
 
   generate() {
@@ -29,12 +36,18 @@ class ProductsServices {
   }
 
   //usamos el asincronismo para cuando hay una demora en la respuesta, en este caso de find() lo tenemos en productsRoutes
-  find() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.products);
-      }, 2000);
-    });
+  /*async find() {
+    const query = 'SELECT * FROM tasks';
+    const rta = await this.pool.query(query);
+    return rta.rows;
+  }*/
+
+  async find() {
+    const query = 'SELECT * FROM tasks';
+    const [data] = await sequelize.query(query);
+    return {
+      data,
+    };
   }
 
   async findOne(id) {

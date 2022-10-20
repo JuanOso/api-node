@@ -5,6 +5,7 @@ const {
   logErrors,
   errorHandler,
   boomErrorHandler,
+  ormErrorHandler,
 } = require('./middlewares/error.handler');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,6 +40,7 @@ routerApi(app);
 
 //los middlewares se ejecutan como se llaman, si el primero que llamamos no tiene un next, ata el proceso de los middlewares
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 

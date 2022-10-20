@@ -1,0 +1,13 @@
+notas curso de Backend con Node.js: Base de Datos con PostgreSQL
+para iniciar el docker
+docker-compose up -d (nombre de servicios)
+para iniciar los servicios
+docker-compose exec postgres bash
+ls -l : ver todos los archivos
+conectarnos a la base de datos
+psql -h localhost -d my_store -U juan
+\d+ : Una vez logueado te va a mostrar la estructura de la base de datos
+\q : Salir de la base de datos
+exit : Nos salimos del contenedor
+docer ps : Nos muestra una tabla con los servicios
+docker inspect <id del contenedor> : Nos da un detalle del contenedor
