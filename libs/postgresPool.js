@@ -3,7 +3,7 @@ const { config } = require('./../config/config');
 
 const options = {};
 if (config.isProd) {
-  options.connectionString = config.dbUrl;
+  options.connectionString = 'postgres://juan:admin123@localhost:5432/my_store';
   options.ssl = {
     rejectUnauthorized: false,
   };
