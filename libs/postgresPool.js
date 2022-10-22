@@ -1,20 +1,18 @@
 const { Pool } = require('pg');
 const { config } = require('./../config/config');
 
-let URI = '';
-
 const options = {};
 if (config.isProd) {
-  (options.connectionString = config.dbUrl),
-    (options.ssl = {
-      rejectUnauthorized: false,
-    });
+  options.connectionString = config.dbUrl;
+  options.ssl = {
+    rejectUnauthorized: false,
+  };
 } else {
   //encode uri es para protejer esta informacion
   const USER = encodeURIComponent(config.dbUser);
   const PASSWORD = encodeURIComponent(config.dbPassword);
   //usualmente la ruta que nos da un servidor para conectar con la base de datos
-  URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+  const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
   options.connectionString = URI;
 }
 
