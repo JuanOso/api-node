@@ -1,6 +1,6 @@
 'use strict';
-//const { DataTypes, Sequelize } = require('sequelize');
-/*const { USER_TABLE, UserSchema } = require('../models/user.model');
+const { DataTypes, Sequelize } = require('sequelize');
+const { USER_TABLE, UserSchema } = require('../models/user.model');
 const { CUSTOMER_TABLE, CustomerSchema } = require('../models/customer.model');
 const { CATEGORY_TABLE, CategorySchema } = require('../models/category.model');
 const { PRODUCT_TABLE, ProductSchema } = require('../models/product.model');
@@ -28,9 +28,9 @@ module.exports = {
     await queryInterface.dropTable(ORDER_TABLE);
     await queryInterface.dropTable(ORDER_PRODUCT_TABLE);
   },
-};*/
+};
 
-'use strict';
+/*'use strict';
 
 const { UserSchema, USER_TABLE } = require('./../models/user.model');
 
@@ -42,4 +42,4 @@ module.exports = {
   async down(queryInterface) {
     await queryInterface.dropTable(USER_TABLE);
   },
-};
+};*/
