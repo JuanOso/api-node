@@ -11,6 +11,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.createTable(CUSTOMER_TABLE);
+    await queryInterface.dropTable(CUSTOMER_TABLE);
   },
 };

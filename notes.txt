@@ -11,3 +11,6 @@ psql -h localhost -d my_store -U juan
 exit : Nos salimos del contenedor
 docer ps : Nos muestra una tabla con los servicios
 docker inspect <id del contenedor> : Nos da un detalle del contenedor
+
+//la direccion para conectar la base de dato es la ip addres del contenedor de nuestra base de dato
+se obtiene ejecutando docker inspect <id del contenedor>

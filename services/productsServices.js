@@ -1,6 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
-const sequelize = require('../libs/sequelize');
+const { models } = require('../libs/sequelize');
+const { Op } = require('sequelize');
 
 //const pool = require('../libs/postgresPool');
 //const pool = require('../libs/sequelize');
@@ -27,11 +28,7 @@ class ProductsServices {
   }
 
   async create(data) {
-    const newProduct = {
-      id: faker.datatype.uuid(),
-      ...data,
-    };
-    this.products.push(newProduct);
+    const newProduct = await models.Product.create(data);
     return newProduct;
   }
 
@@ -42,12 +39,31 @@ class ProductsServices {
     return rta.rows;
   }*/
 
-  async find() {
-    const query = 'SELECT * FROM tasks';
-    const [data] = await sequelize.query(query);
-    return {
-      data,
+  async find(query) {
+    const options = {
+      include: ['category'],
+      where: {},
     };
+    const { limit, offset } = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    const { price } = query;
+    if (price) {
+      options.where.price = price;
+    }
+
+    const { price_min, price_max } = query;
+    if (price_min && price_max) {
+      options.where.price = {
+        [Op.gte]: price_min,
+        [Op.lte]: price_max,
+      };
+    }
+    //const query = 'SELECT * FROM tasks';
+    const products = await models.Product.findAll(options);
+    return products;
   }
 
   async findOne(id) {

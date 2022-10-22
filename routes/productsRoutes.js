@@ -5,16 +5,25 @@ const {
   createProductSchema,
   updateProductSchema,
   getProductSchema,
+  queryProductSchema,
 } = require('./../schemas/product.schema');
 
 const router = express.Router();
 const service = new ProductsServices();
 
 //obteniendo con req los query, los query soon ocionales y se ven así en una url example.com/products?page=100
-router.get('/', async (req, res) => {
-  const products = await service.find();
-  res.json(products);
-});
+router.get(
+  '/',
+  validatorHandler(queryProductSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const products = await service.find(req.query);
+      res.json(products);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 //cuando hay dos endpoints que podrías pisarse, la solucion es poner el estatico antes que el dinamico en el orden de ejecucon
 //como en este caso el endpoint /products/filter y /products/:id
