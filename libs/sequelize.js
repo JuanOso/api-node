@@ -21,10 +21,7 @@ if (config.isProd) {
 }
 
 //en dialect le pasamos a que tipo de base de daytos nos vamos a conectar
-const sequelize = new Sequelize(
-  'postgres://juan:admin123@localhost:5432/my_store',
-  options
-);
+const sequelize = new Sequelize(config.dbUrl, options);
 
 setupModels(sequelize);
 
