@@ -9,10 +9,10 @@ const setupModels = require('./../db/models');
 
 const options = {
   dialect: 'postgres',
-  logging: config.isProd ? false : true,
+  logging: 'production' ? false : true,
 };
 
-if (config.isProd) {
+if ('production') {
   options.dialectOptions = {
     ssl: {
       rejectUnauthorized: false,
