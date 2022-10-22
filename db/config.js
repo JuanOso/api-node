@@ -10,7 +10,7 @@ module.exports = {
     dialect: 'postgres',
   },
   production: {
-    url: 'postgres://juan:admin123@localhost:5432/my_store',
+    url: config.dbUrl,
     dialect: 'postgres',
     dialectOptions: {
       ssl: {
